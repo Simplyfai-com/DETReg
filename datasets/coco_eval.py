@@ -216,6 +216,7 @@ def create_common_coco_eval(coco_eval, img_ids, eval_imgs):
 def evaluate(self):
     '''
     Run per image evaluation on given images and store results (a list of dict) in self.evalImgs
+    self is a COCOEval instance
     :return: None
     '''
     # tic = time.time()
@@ -231,7 +232,6 @@ def evaluate(self):
         p.catIds = list(np.unique(p.catIds))
     p.maxDets = sorted(p.maxDets)
     self.params = p
-
     self._prepare()
     # loop through images, area range, max detection number
     catIds = p.catIds if p.useCats else [-1]
@@ -240,6 +240,13 @@ def evaluate(self):
         computeIoU = self.computeIoU
     elif p.iouType == 'keypoints':
         computeIoU = self.computeOks
+    # Add is crowd to every ground truth to avoid computeIoU to fail
+    for key, value in self._gts.items():
+        new_list = []
+        for v in value:
+            v["iscrowd"] =False
+            new_list.append(v)
+        self._gts[key] = new_list
     self.ious = {
         (imgId, catId): computeIoU(imgId, catId)
         for imgId in p.imgIds

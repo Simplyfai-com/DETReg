@@ -308,6 +308,8 @@ def get_datasets(args):
 def set_dataset_path(args):
     args.coco_path = os.path.join(args.data_root, 'MSCoco')
     args.airbus_path = os.path.join(args.data_root, 'airbus-ship-detection')
+    args.custom_path = os.path.join(args.data_root, "custom")
+    args.coco_path = os.path.join(args.data_root, 'coco-2017')
     args.imagenet_path = os.path.join(args.data_root, 'ilsvrc')
     args.imagenet100_path = os.path.join(args.data_root, 'ilsvrc100')
     args.voc_path = os.path.join(args.data_root, 'pascal')

@@ -9,13 +9,13 @@
 """
 Copy-Paste from torchvision, but add utility of caching images on memory
 """
+from cv2 import transform
 from torchvision.datasets.vision import VisionDataset
 from PIL import Image
 import os
 import os.path
 import tqdm
 from io import BytesIO
-
 
 class CocoDetection(VisionDataset):
     """`MS Coco Detection <http://mscoco.org/dataset/#detections-challenge2016>`_ Dataset.

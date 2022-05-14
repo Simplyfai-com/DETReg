@@ -266,7 +266,10 @@ def main(args):
 
 
 def get_datasets(args):
-    if args.dataset == 'coco':
+    if args.dataset == "packaging":
+        dataset_train = build_dataset(image_set='train', args=args)
+        dataset_val = build_dataset(image_set='val', args=args)
+    elif args.dataset == 'coco':
         dataset_train = build_dataset(image_set='train', args=args)
         dataset_val = build_dataset(image_set='val', args=args)
     elif args.dataset == 'coco_pretrain':
@@ -308,7 +311,7 @@ def get_datasets(args):
 def set_dataset_path(args):
     args.coco_path = os.path.join(args.data_root, 'MSCoco')
     args.airbus_path = os.path.join(args.data_root, 'airbus-ship-detection')
-    args.custom_path = os.path.join(args.data_root, "custom")
+    args.packaging_path = os.path.join(args.data_root, 'packaging_coco_format')
     args.coco_path = os.path.join(args.data_root, 'coco-2017')
     args.imagenet_path = os.path.join(args.data_root, 'ilsvrc')
     args.imagenet100_path = os.path.join(args.data_root, 'ilsvrc100')

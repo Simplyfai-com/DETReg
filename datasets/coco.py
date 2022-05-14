@@ -165,13 +165,16 @@ def make_coco_transforms(image_set):
 
 
 def build(image_set, args):
-    root = Path(args.coco_path)
-    assert root.exists(), f'provided COCO path {root} does not exist'
+    if args.dataset == "packaging":
+        root = Path(args.packaging_path)
+    else:
+        root = Path(args.coco_path)
+    assert root.exists(), f'provided dataset path {root} does not exist'
     mode = 'instances'
     PATHS = {
         "train": (root / "train" / "data", root / "train" / f'labels.json'),
         "val": (root / "validation" / "data", root / "validation" / f'labels.json'),
-        "test": (root / "test" / "data", root / "test" / f'labels.json'),
+        # "test": (root / "test" / "data", root / "test" / f'labels.json'),
     }
 
     img_folder, ann_file = PATHS[image_set]

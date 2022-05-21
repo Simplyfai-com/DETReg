@@ -9,6 +9,7 @@
 
 
 import argparse
+import glob
 import datetime
 import json
 import random
@@ -233,6 +234,11 @@ def main(args):
                     'epoch': epoch,
                     'args': args,
                 }, checkpoint_path)
+                # keep only latest checkpoints
+                checkpoints_list = sorted(glob.glob(f"{output_dir}/*.pth"))
+                if len(checkpoints_list) > 3:
+                    for old_checkpoint in checkpoints_list[:-3]:
+                        os.remove(old_checkpoint)
         if args.dataset in ['coco', 'voc', 'packaging'] and epoch % args.eval_every == 0:
             test_stats, coco_evaluator = evaluate(
                 model, criterion, postprocessors, data_loader_val, base_ds, device, args.output_dir

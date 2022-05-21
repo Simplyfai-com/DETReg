@@ -22,7 +22,9 @@ from .torchvision_datasets import CocoDetection as TvCocoDetection
 from util.misc import get_local_rank, get_local_size
 import datasets.transforms as T
 
-
+"""
+Class for handleling datasets in coco format
+"""
 class CocoDetection(TvCocoDetection):
     def __init__(self, img_folder, ann_file, transforms, return_masks, cache_mode=False, local_rank=0, local_size=1, no_cats=False, filter_pct=-1, seed=42):
         super(CocoDetection, self).__init__(img_folder, ann_file,
@@ -174,7 +176,7 @@ def build(image_set, args):
     PATHS = {
         "train": (root / "train" / "data", root / "train" / f'labels.json'),
         "val": (root / "validation" / "data", root / "validation" / f'labels.json'),
-        # "test": (root / "test" / "data", root / "test" / f'labels.json'),
+        "test": (root / "test" / "data", root / "test" / f'labels.json'),  # Packaging isn't currently using this
     }
 
     img_folder, ann_file = PATHS[image_set]

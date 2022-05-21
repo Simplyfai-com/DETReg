@@ -233,7 +233,7 @@ def main(args):
                     'epoch': epoch,
                     'args': args,
                 }, checkpoint_path)
-        if args.dataset in ['coco', 'voc'] and epoch % args.eval_every == 0:
+        if args.dataset in ['coco', 'voc', 'packaging'] and epoch % args.eval_every == 0:
             test_stats, coco_evaluator = evaluate(
                 model, criterion, postprocessors, data_loader_val, base_ds, device, args.output_dir
             )

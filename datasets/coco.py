@@ -167,7 +167,7 @@ def make_coco_transforms(image_set):
 
 
 def build(image_set, args):
-    if args.dataset == "packaging":
+    if args.dataset == "packaging" or args.dataset == "packaging_pretrain":
         root = Path(args.packaging_path)
     else:
         root = Path(args.coco_path)

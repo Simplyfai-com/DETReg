@@ -29,7 +29,7 @@ from models import build_model
 from models.backbone import build_swav_backbone, build_swav_backbone_old
 from util.default_args import set_model_defaults, get_args_parser
 
-PRETRAINING_DATASETS = ['imagenet', 'imagenet100', 'coco_pretrain', 'airbus_pretrain']
+PRETRAINING_DATASETS = ['imagenet', 'imagenet100', 'coco_pretrain', 'airbus_pretrain', 'packaging_pretrain']
 
 
 def main(args):
@@ -274,6 +274,10 @@ def main(args):
 def get_datasets(args):
     if args.dataset == "packaging":
         dataset_train = build_dataset(image_set='train', args=args)
+        dataset_val = build_dataset(image_set='val', args=args)
+    elif args.dataset == "packaging_pretrain":
+        from datasets.selfdet import build_selfdet
+        dataset_train = build_selfdet(image_set='train', args=args, p=os.path.join(args.packaging_path, 'train'))
         dataset_val = build_dataset(image_set='val', args=args)
     elif args.dataset == 'coco':
         dataset_train = build_dataset(image_set='train', args=args)

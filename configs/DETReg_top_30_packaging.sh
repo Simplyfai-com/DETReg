@@ -5,7 +5,7 @@ EXP_DIR=exps/DETReg_top30_packaging
 
 python3 -u main.py --output_dir ${EXP_DIR} \
     --dataset packaging_pretrain \
-    --object_embedding_head "head" \
+    --obj_embedding_head "head" \
     --strategy topk \
     --load_backbone swav \
     --max_prop 30 \

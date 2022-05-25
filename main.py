@@ -276,6 +276,7 @@ def get_datasets(args):
         dataset_train = build_dataset(image_set='train', args=args)
         dataset_val = build_dataset(image_set='val', args=args)
     elif args.dataset == "packaging_pretrain":
+        from datasets.selfdet import build_selfdet
         dataset_train = build_selfdet(image_set='train', args=args, p=os.path.join(args.packaging_path, 'train'))
         dataset_val = build_dataset(image_set='val', args=args)
     elif args.dataset == 'coco':
